@@ -1,27 +1,26 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-function App() {
-  let store = localStorage.getItem('user');
-  const [list, setList] = useState(store === null ? [] : JSON.parse(store));
-  
+function App () {
+  const list = [
+    { name: '采用localStorage传值', url: '/test1/index' },
+    { name: '采用url传值', url: '/test2/index' },
+    { name: '采用useContext，useReducer', url: '/test3/index' }
+  ]
   return (
-    <div className="box">
-      <p className="small-title" style={{display: list.length === 0 ? 'block' : 'none'}}>请先添加用户</p>
-      <ul className="list">
+    <div>
+      <p className="show-title">这次主要在纠结页面间的传值，后面用了useReducer，就没用reduex。</p>
+      <ul className="flex show-select">
         {
           list.map((item, index) => {
             return (
-              <li className="flex flex-center" key={ index }>
-                <span>{ item.name }</span><Link to={ `/show/${ index }` }><i className="icon-pencil"></i></Link>
-              </li>
+              <li key={ index }><Link to={ item.url }>{ item.name }</Link></li>
             )
           })
         }
-        </ul>
-        <p className="footer"><Link to="/show"><i className="icon-plus"></i></Link></p>
+      </ul>
     </div>
   )
 }
 
-export default App;
+export default App
